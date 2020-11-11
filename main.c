@@ -16,27 +16,28 @@ int main(){
     //---------------------------------------------------
     //srand(time(NULL)); 
 	int* tab = cle();
-	int* p_10,*p_8,*g,*d,*decG,*decD,*merge;
+	int* p_10,*k1,*k2,*dec,*dec2;
 	//afficher_cle10(tab);
 	
 	p_10 = p10(tab);
 	printf("p10 : ");
 	afficher_cle10(p_10);
 	
-	g = separationG(p_10);
-	d = separationD(p_10);
-	decG = decalage(g);
-	decD = decalage(d);
-	merge = unir(decG,decD);
-	//afficher_cle5(decG);
-	//afficher_cle5(decD);
-	printf("merge : ");
-	afficher_cle10(merge);
 	
-	p_8 = p8(merge);
-	printf("p8 : ");
-	afficher_cle8(p_8);
+	dec = decalage10(p_10);
+	printf("dec : ");
+	afficher_cle10(dec);
 	
+	k1 = p8(dec);
+	printf("k1 : ");
+	afficher_cle8(k1);
+	
+	dec2 = decalage10(dec);
+	dec2 = decalage10(dec2);
+	
+	k2 = p8(dec2);
+	printf("k2 : ");
+	afficher_cle8(k2);
 	
 	//--------------FREE---------------------------------
 	free(text_bin);
@@ -44,11 +45,10 @@ int main(){
     free(rst_r_ip);
 	free(tab);
 	free(p_10);
-	free(p_8);
-	free(g);
-	free(d);
-	free(decG);
-	free(decD);
+	free(dec);
+	free(dec2);
+	free(k1);
+	free(k2);
     return EXIT_SUCCESS;
 }
 

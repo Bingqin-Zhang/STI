@@ -13,9 +13,7 @@ void afficher_cle8(int* cle);
 void afficher_cle5(int* cle);
 int* p10(int* cle);
 int* p8(int* cle);
-int* separationG(int* cle);
-int* separationD(int* cle);
-int* decalage(int* cle);
-int* unir(int* cle1, int* cle2);
+int* decalage10(int* cle);
+
 
 #endif

@@ -141,54 +141,23 @@ int* p8(int* cle){
 	int pos[8] = {5,2,6,3,7,4,9,8};
 	int i;
 	int* tab = (int*) malloc(sizeof(int)*8);
+	for(i =0 ; i<8 ; i++){
+		tab[i] = cle[pos[i]];
+	}
+	return tab;
+}
+
+
+
+int* decalage10(int* cle){
+	int pos[10] = {1,2,3,4,0,6,7,8,9,5};
+	int i;
+	int* tab = (int*) malloc(sizeof(int)*10);
 	for(i =0 ; i<10 ; i++){
 		tab[i] = cle[pos[i]];
 	}
 	return tab;
 }
-
-int* separationG(int* cle){
-	int i;
-	int* tab = (int*) malloc(sizeof(int)*5);
-	for(i =0 ; i<5 ; i++){
-		tab[i] = cle[i];
-	}
-	return tab;
-}
-
-int* separationD(int* cle){
-	int i;
-	int* tab = (int*) malloc(sizeof(int)*5);
-	for(i =0 ; i<5 ; i++){
-		tab[i] = cle[i+5];
-	}
-	return tab;
-}
-
-int* decalage(int* cle){
-	int pos[5] = {4,3,2,1,0};
-	int i;
-	int* tab = (int*) malloc(sizeof(int)*5);
-	for(i =0 ; i<5 ; i++){
-		tab[i] = cle[pos[i]];
-	}
-	return tab;
-}
-
-int* unir(int* cle1, int* cle2){
-	int i;
-	int* tab = (int*) malloc(sizeof(int)*10);
-	for(i =0 ; i<5 ; i++){
-		tab[i] = cle1[i];
-		tab[5+i] = cle2[i];
-	}
-	return tab;
-}
-
-
-
-
-
 
 
 
