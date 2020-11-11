@@ -132,6 +132,16 @@ int* p8(int* cle){
 	return tab;
 }
 
+int* p4(int* cle){
+	int pos[4] = {1,3,2,0};
+	int i;
+	int* tab = (int*) malloc(sizeof(int)*4);
+	for(i =0 ; i<4 ; i++){
+		tab[i] = cle[pos[i]];
+	}
+	return tab;
+}
+
 
 
 int* decalage10(int* cle){
@@ -144,11 +154,11 @@ int* decalage10(int* cle){
 	return tab;
 }
 
-int* ou_ex(int* ep, int* k1,int bit){
+int* ou_ex(int* ep, int* k,int bit){
 	int i;
 	int* tab = (int*) malloc(sizeof(int)*8);
 	for(i =0 ; i<bit ; i++){
-		if(ep[i] == k1[i])
+		if(ep[i] == k[i])
 			tab[i] = 0;
 		else
 			tab[i] = 1;
@@ -156,18 +166,42 @@ int* ou_ex(int* ep, int* k1,int bit){
 	return tab;
 }
 
-int* F(int* cle,int* k1){
+
+int* F(int* cle,int* k){
 	int pos[8] = {3,0,1,2,1,2,3,0};
 	int i;
 	int* ep = (int*) malloc(sizeof(int)*8);
 	int* res = (int*) malloc(sizeof(int)*8);
+	int s0[4][4] = {1,0,3,2,3,2,1,0,0,2,1,3,3,1,3,2};
+	int s1[4][4] = {0,1,2,3,2,0,1,3,3,0,1,0,2,1,0,3};
 	for(i =0 ; i<8 ; i++){
 		ep[i] = cle[pos[i]];
 	}
+	res = ou_ex(ep,k,8);
 	
-	res = ou_ex(ep,k1,8);
+	int row,col;
+	row = bin_to_int({res[0],res[3]});
+	col = bin_to_int({res[1],res[2]});
 	
-	return res;
+	int row2,col2;
+	row2 = bin_to_int({res[4],res[7]});
+	col2 = bin_to_int({res[5],res[6]});
+	
+	int sortie = s0[row][col];
+	int sortie2 = s1[row2][col2];
+	
+	int* s = int_to_bin(sortie,2);
+	int* s2 = int_to_bin(sortie2,2);
+	
+	int* tab = (int*) malloc(sizeof(int)*4);
+	for(i =0 ; i<2 ; i++){
+		tab[i] = s[i];
+		tab[2+i] = s2[i];
+	}
+	
+	int* p_4 = p4(tab);
+	
+	return p_4;
 }
 
 
