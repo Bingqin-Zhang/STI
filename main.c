@@ -14,34 +14,32 @@ int main(){
     int* rst_r_ip = rip(rst_ip);
     
     //---------------------------------------------------
-    //srand(time(NULL)); 
 	int* tab = cle();
 	int* p_10,*k1,*k2,*dec,*dec2,*EP;
-	//afficher_cle10(tab);
 	
 	p_10 = p10(tab);
 	printf("p10 : ");
-	afficher_cle10(p_10);
+	afficher_cle(p_10,10);
 	
 	
 	dec = decalage10(p_10);
 	printf("dec : ");
-	afficher_cle10(dec);
+	afficher_cle(dec,10);
 	
 	k1 = p8(dec);
 	printf("k1 : ");
-	afficher_cle8(k1);
+	afficher_cle(k1,8);
 	
 	dec2 = decalage10(dec);
 	dec2 = decalage10(dec2);
 	
 	k2 = p8(dec2);
 	printf("k2 : ");
-	afficher_cle8(k2);
+	afficher_cle(k2,8);
 	
 	int pos[4] = {1,0,1,1};
-	EP = F(pos);
-	afficher_cle8(EP);
+	EP = F(pos,k1);
+	afficher_cle(EP,8);
 	
 	//--------------FREE---------------------------------
 	free(text_bin);
@@ -53,7 +51,6 @@ int main(){
 	free(dec2);
 	free(k1);
 	free(k2);
-	//free(pos);
 	free(EP);
     return EXIT_SUCCESS;
 }

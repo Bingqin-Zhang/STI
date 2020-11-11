@@ -8,12 +8,11 @@ int* rip(int* n);
 
 
 int* cle();
-void afficher_cle10(int* cle);
-void afficher_cle8(int* cle);
-void afficher_cle5(int* cle);
+void afficher_cle(int* cle, int bit);
 int* p10(int* cle);
 int* p8(int* cle);
 int* decalage10(int* cle);
-int* F(int* cle);
+int* ou_ex(int* ep, int* k1,int bit);
+int* F(int* cle,int* k1);
 
 #endif

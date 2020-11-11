@@ -103,29 +103,14 @@ int* cle(){
 	return tab;
 }
 
-void afficher_cle10(int* cle){
+void afficher_cle(int* cle, int bit){
 	int i;
-	for(i = 0; i<10; i++){
+	for(i = 0; i<bit; i++){
 		printf("%d",cle[i]);
 	}
 	printf("\n");
 }
 
-void afficher_cle8(int* cle){
-	int i;
-	for(i = 0; i<8; i++){
-		printf("%d",cle[i]);
-	}
-	printf("\n");
-}
-
-void afficher_cle5(int* cle){
-	int i;
-	for(i = 0; i<5; i++){
-		printf("%d",cle[i]);
-	}
-	printf("\n");
-}
 
 int* p10(int* cle){
 	int pos[10] = {2,4,1,6,3,9,0,8,7,5};
@@ -159,14 +144,30 @@ int* decalage10(int* cle){
 	return tab;
 }
 
-int* F(int* cle){
+int* ou_ex(int* ep, int* k1,int bit){
+	int i;
+	int* tab = (int*) malloc(sizeof(int)*8);
+	for(i =0 ; i<bit ; i++){
+		if(ep[i] == k1[i])
+			tab[i] = 0;
+		else
+			tab[i] = 1;
+	}
+	return tab;
+}
+
+int* F(int* cle,int* k1){
 	int pos[8] = {3,0,1,2,1,2,3,0};
 	int i;
-	int* EP = (int*) malloc(sizeof(int)*8);
+	int* ep = (int*) malloc(sizeof(int)*8);
+	int* res = (int*) malloc(sizeof(int)*8);
 	for(i =0 ; i<8 ; i++){
-		EP[i] = cle[pos[i]];
+		ep[i] = cle[pos[i]];
 	}
-	return EP;
+	
+	res = ou_ex(ep,k1,8);
+	
+	return res;
 }
 
 
