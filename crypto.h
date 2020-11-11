@@ -14,6 +14,6 @@ void afficher_cle5(int* cle);
 int* p10(int* cle);
 int* p8(int* cle);
 int* decalage10(int* cle);
-
+int* F(int* cle);
 
 #endif

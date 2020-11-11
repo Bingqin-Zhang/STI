@@ -159,6 +159,15 @@ int* decalage10(int* cle){
 	return tab;
 }
 
+int* F(int* cle){
+	int pos[8] = {3,0,1,2,1,2,3,0};
+	int i;
+	int* EP = (int*) malloc(sizeof(int)*8);
+	for(i =0 ; i<8 ; i++){
+		EP[i] = cle[pos[i]];
+	}
+	return EP;
+}
 
 
 
