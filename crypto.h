@@ -5,6 +5,7 @@ int* char_to_bin(char* c, int taille);
 int* int_to_bin(int a, int taille);
 int bin_to_int();
 int* ip(int* c);
+int* ip_inv(int* c);
 int* rip(int* n);
 
 
@@ -21,7 +22,7 @@ int* SW(int* cle, int taille);
 int* get_k1(int* key);
 int* get_k2(int* key);
 int* unir(int* t1, int* t2, int taille);
-int* encryption(char* plaintext, int* k1, int* k2);
+int* encryption(int* plaintext, int* k1, int* k2);
 int* decryption(int* ciphertext, int* k1, int* k2);
 
 #endif

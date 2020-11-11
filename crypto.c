@@ -75,6 +75,24 @@ int* ip(int* text){
     return rst;
 }
 
+/** Fonction qui cree IP-1 a partir des bits du texte brut
+
+    @param 
+    @return
+*/
+int* ip_inv(int* text){
+    int pos[8] = {3, 0, 2, 4, 6, 1, 7, 5};
+    int* rst = (int*) malloc(sizeof(int)*8);
+    int i;
+    for(i=0; i<8; i++){
+        rst[i] = text[pos[i]];
+    }
+    
+    return rst;
+}
+
+
+
 /** Fonction qui cree IP a partir des bits du texte brut
 
     @param 
@@ -198,7 +216,17 @@ int* F(int* cle,int* k){
 
 int* Fk(int* cle, int* k){
     int* p4 = F(cle, k);
-    cle = ou_ex(cle, p4, 4);
+    afficher_cle(p4,4);
+    int i;
+    int* tab = (int*) malloc(sizeof(int)*4);
+	for(i =0 ; i<4 ; i++){
+		tab[i] = cle[i];
+	}
+    tab = ou_ex(tab, p4, 4);
+    
+    for(i =0 ; i<4 ; i++){
+		cle[i] = tab[i];
+	}
     
     return cle;
 }
@@ -233,17 +261,20 @@ int* unir(int* t1, int* t2, int taille){
     return rst;
 }
 
-int* encryption(char* plaintext, int* k1, int* k2){
-    int* text = char_to_bin(plaintext, 8);
-    int* rst = Fk(SW(Fk(ip(text),k1),8),k2);
-    
-    return rst;    
+int* encryption(int* plaintext, int* k1, int* k2){
+    //int* text = char_to_bin(plaintext, 8);
+    int* a = Fk(ip(plaintext),k1);
+    afficher_cle(a,8);
+    int* b = SW(a,8);
+    int* c = Fk(b,k2);
+    int* d = ip_inv(c);
+    //int* rst = ip_inv(Fk(SW(Fk(ip(plaintext),k1),8),k2));
+    return d;    
 }
 
 int* decryption(int* ciphertext, int* k1, int* k2){
     //int* text = char_to_bin(ciphertext, 8);
-    int* rst = Fk(SW(Fk(ip(ciphertext),k2),8),k1);
-
+    int* rst = Fk(SW(Fk(ip_inv(ciphertext),k2),8),k1);
     return rst;
 }
 
