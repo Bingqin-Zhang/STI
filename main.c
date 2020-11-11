@@ -5,53 +5,23 @@
 #include"crypto.h"
 
 int main(){
+    int* original_key = cle(10);
+    
+    int* k1 = get_k1(original_key);
+    int* k2 = get_k2(original_key);
+    
+    char* c = "c";
+    afficher_cle(char_to_bin(c,8),8);
 
-    srand(time(NULL));
+    int* crypte = encryption(c, k1, k2);
     
-    char* text = "d";
-    int* text_bin = char_to_bin(text);
-    int* rst_ip = ip(text_bin);
-    int* rst_r_ip = rip(rst_ip);
+    afficher_cle(crypte,8);
     
-    //---------------------------------------------------
-	int* tab = cle();
-	int* p_10,*k1,*k2,*dec,*dec2,*EP;
-	
-	p_10 = p10(tab);
-	printf("p10 : ");
-	afficher_cle(p_10,10);
-	
-	
-	dec = decalage10(p_10);
-	printf("dec : ");
-	afficher_cle(dec,10);
-	
-	k1 = p8(dec);
-	printf("k1 : ");
-	afficher_cle(k1,8);
-	
-	dec2 = decalage10(dec);
-	dec2 = decalage10(dec2);
-	
-	k2 = p8(dec2);
-	printf("k2 : ");
-	afficher_cle(k2,8);
-	
-	int pos[4] = {1,0,1,1};
-	EP = F(pos,k1);
-	afficher_cle(EP,8);
-	
-	//--------------FREE---------------------------------
-	free(text_bin);
-    free(rst_ip);
-    free(rst_r_ip);
-	free(tab);
-	free(p_10);
-	free(dec);
-	free(dec2);
-	free(k1);
-	free(k2);
-	free(EP);
+    
+    
+    int* decrypte = decryption(crypte, k1, k2);
+    afficher_cle(decrypte,8);
+    
     return EXIT_SUCCESS;
 }
 
