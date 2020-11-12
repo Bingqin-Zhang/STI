@@ -21,11 +21,11 @@ int main(){
     int* crypte = encryption(c, k1, k2);
     // On doit obtenir 00111000 en ciphertext
     
-    //afficher_cle(crypte,8);
+    afficher_cle(crypte,8);
     
     
     
-    int* decrypte = decryption(crypte, k1, k2);
+    //int* decrypte = decryption(crypte, k1, k2);
     //afficher_cle(decrypte,8);
     
     return EXIT_SUCCESS;

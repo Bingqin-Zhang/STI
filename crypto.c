@@ -4,6 +4,7 @@
 #include<string.h>
 #include <time.h>
 
+
 /** Fonction qui prend une chaine de caracteres et renvoie son evriture en binaire
 
     @param c la chaine de caracteres à convertir
@@ -184,7 +185,7 @@ int* ou_ex(int* ep, int* k, int bit){
 
 
 int* F(int* cle,int* k){
-	int pos[8] = {3,0,1,2,1,2,3,0};
+	int pos[8] = {7,4,5,6,5,6,7,4};
 	int i;
 	int* ep = (int*) malloc(sizeof(int)*8);
 	int* res = (int*) malloc(sizeof(int)*8);
@@ -216,7 +217,7 @@ int* F(int* cle,int* k){
 
 int* Fk(int* cle, int* k){
     int* p4 = F(cle, k);
-    afficher_cle(p4,4);
+    //afficher_cle(p4,4);
     int i;
     int* tab = (int*) malloc(sizeof(int)*4);
 	for(i =0 ; i<4 ; i++){
@@ -263,13 +264,12 @@ int* unir(int* t1, int* t2, int taille){
 
 int* encryption(int* plaintext, int* k1, int* k2){
     //int* text = char_to_bin(plaintext, 8);
-    int* a = Fk(ip(plaintext),k1);
-    afficher_cle(a,8);
+    int* a = Fk(ip(plaintext),k1);    
     int* b = SW(a,8);
     int* c = Fk(b,k2);
     int* d = ip_inv(c);
     //int* rst = ip_inv(Fk(SW(Fk(ip(plaintext),k1),8),k2));
-    return d;    
+    return b;    
 }
 
 int* decryption(int* ciphertext, int* k1, int* k2){
