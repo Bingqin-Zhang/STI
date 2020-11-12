@@ -53,9 +53,9 @@ int* int_to_bin(int a, int taille){
 int bin_to_int(int* t){
     int rst = 0;
     if(t[0] == 1)
-        rst += 1;
-    if(t[1] == 1)
         rst += 2;
+    if(t[1] == 1)
+        rst += 1;
 
     return rst;
 }
@@ -76,22 +76,6 @@ int* ip(int* text){
     return rst;
 }
 
-/** Fonction qui cree IP-1 a partir des bits du texte brut
-
-    @param 
-    @return
-*/
-int* ip_inv(int* text){
-    int pos[8] = {3, 0, 2, 4, 6, 1, 7, 5};
-    int* rst = (int*) malloc(sizeof(int)*8);
-    int i;
-    for(i=0; i<8; i++){
-        rst[i] = text[pos[i]];
-    }
-    
-    return rst;
-}
-
 
 
 /** Fonction qui cree IP a partir des bits du texte brut
@@ -100,7 +84,7 @@ int* ip_inv(int* text){
     @return
 */
 int* rip(int* n){
-    int pos[8] = {1, 5, 2, 0, 3, 7, 4, 6};
+    int pos[8] = {3, 0, 2, 4, 6, 1, 7, 5};
     int* rst = (int*) malloc(sizeof(int)*8);
     int i;
     for(i=0; i<8; i++){
@@ -201,17 +185,18 @@ int* F(int* cle,int* k){
 	int row = bin_to_int(t1);
 	int col = bin_to_int(t2);
 	int* sortie = int_to_bin(s0[row][col], 2);
-	
+
 	int t3[2] = {res[4],res[7]};
 	int t4[2] = {res[5],res[6]};
 	row = bin_to_int(t3);
 	col = bin_to_int(t4);
+
 	int* sortie2 = int_to_bin(s1[row][col], 2);
 	
 	int* tab = unir(sortie, sortie2, 4);
 	
 	int* p_4 = p4(tab);
-	
+	//afficher_cle(p_4,4);
 	return p_4;
 }
 
@@ -224,11 +209,11 @@ int* Fk(int* cle, int* k){
 		tab[i] = cle[i];
 	}
     tab = ou_ex(tab, p4, 4);
-    
+   
     for(i =0 ; i<4 ; i++){
 		cle[i] = tab[i];
 	}
-    
+
     return cle;
 }
 
@@ -264,17 +249,17 @@ int* unir(int* t1, int* t2, int taille){
 
 int* encryption(int* plaintext, int* k1, int* k2){
     //int* text = char_to_bin(plaintext, 8);
-    int* a = Fk(ip(plaintext),k1);    
+    int* a = Fk(ip(plaintext),k1); 
     int* b = SW(a,8);
     int* c = Fk(b,k2);
-    int* d = ip_inv(c);
-    //int* rst = ip_inv(Fk(SW(Fk(ip(plaintext),k1),8),k2));
-    return b;    
+    int* d = rip(c);
+    //int* rst = rip(Fk(SW(Fk(ip(plaintext),k1),8),k2));
+    return d;    
 }
 
 int* decryption(int* ciphertext, int* k1, int* k2){
     //int* text = char_to_bin(ciphertext, 8);
-    int* rst = Fk(SW(Fk(ip_inv(ciphertext),k2),8),k1);
+    int* rst = ip(Fk(SW(Fk(rip(ciphertext),k2),8),k1));
     return rst;
 }
 

@@ -5,7 +5,6 @@ int* char_to_bin(char* c, int taille);
 int* int_to_bin(int a, int taille);
 int bin_to_int();
 int* ip(int* c);
-int* ip_inv(int* c);
 int* rip(int* n);
 
 
