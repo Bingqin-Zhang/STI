@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include <time.h>
+#include<math.h>
 
 
 /** Fonction qui prend une chaine de caracteres et renvoie son evriture en binaire
@@ -60,22 +61,43 @@ int bin_to_int(int* t){
     return rst;
 }
 
-/** Fonction qui cree IP a partir des bits du texte brut
-
-    @param 
-    @return
-*/
-int* ip(int* text){
-    int pos[8] = {1, 5, 2, 0, 3, 7, 4, 6};
-    int* rst = (int*) malloc(sizeof(int)*8);
-    int i;
+char bin_to_char(int* tab){
+    int i, j = 7, rst;
     for(i=0; i<8; i++){
-        rst[i] = text[pos[i]];
+        if(tab[i] == 1)
+            rst += pow(2,j);
+        j--;
+    }
+    
+    return (char) rst;
+}
+
+int* permute(int* bits, int taille, int tab[taille]){
+    int* rst = (int*) malloc(sizeof(int)*taille);
+    int i;
+    for(i=0; i<taille; i++){
+        rst[i] = bits[tab[i]];
     }
     
     return rst;
 }
 
+/** Fonction qui cree IP a partir des bits du texte brut
+
+    @param 
+    @return
+*/
+/*int* ip(int* text){*/
+/*    int pos[8] = {1, 5, 2, 0, 3, 7, 4, 6};*/
+/*    int* rst = (int*) malloc(sizeof(int)*8);*/
+/*    int i;*/
+/*    for(i=0; i<8; i++){*/
+/*        rst[i] = text[pos[i]];*/
+/*    }*/
+/*    */
+/*    return rst;*/
+/*}*/
+
 
 
 /** Fonction qui cree IP a partir des bits du texte brut
@@ -83,16 +105,16 @@ int* ip(int* text){
     @param 
     @return
 */
-int* rip(int* n){
-    int pos[8] = {3, 0, 2, 4, 6, 1, 7, 5};
-    int* rst = (int*) malloc(sizeof(int)*8);
-    int i;
-    for(i=0; i<8; i++){
-        rst[i] = n[pos[i]];
-    }
-    
-    return rst;
-}
+/*int* rip(int* n){*/
+/*    int pos[8] = {3, 0, 2, 4, 6, 1, 7, 5};*/
+/*    int* rst = (int*) malloc(sizeof(int)*8);*/
+/*    int i;*/
+/*    for(i=0; i<8; i++){*/
+/*        rst[i] = n[pos[i]];*/
+/*    }*/
+/*    */
+/*    return rst;*/
+/*}*/
 
 int* cle(int taille){
 	int i, num;
@@ -113,47 +135,47 @@ void afficher_cle(int* cle, int bit){
 }
 
 
-int* p10(int* cle){
-	int pos[10] = {2,4,1,6,3,9,0,8,7,5};
-	int i;
-	int* tab = (int*) malloc(sizeof(int)*10);
-	for(i =0 ; i<10 ; i++){
-		tab[i] = cle[pos[i]];
-	}
-	return tab;
-}
+/*int* p10(int* cle){*/
+/*	int pos[10] = {2,4,1,6,3,9,0,8,7,5};*/
+/*	int i;*/
+/*	int* tab = (int*) malloc(sizeof(int)*10);*/
+/*	for(i =0 ; i<10 ; i++){*/
+/*		tab[i] = cle[pos[i]];*/
+/*	}*/
+/*	return tab;*/
+/*}*/
 
-int* p8(int* cle){
-	int pos[8] = {5,2,6,3,7,4,9,8};
-	int i;
-	int* tab = (int*) malloc(sizeof(int)*8);
-	for(i =0 ; i<8 ; i++){
-		tab[i] = cle[pos[i]];
-	}
-	return tab;
-}
+/*int* p8(int* cle){*/
+/*	int pos[8] = {5,2,6,3,7,4,9,8};*/
+/*	int i;*/
+/*	int* tab = (int*) malloc(sizeof(int)*8);*/
+/*	for(i =0 ; i<8 ; i++){*/
+/*		tab[i] = cle[pos[i]];*/
+/*	}*/
+/*	return tab;*/
+/*}*/
 
-int* p4(int* cle){
-	int pos[4] = {1,3,2,0};
-	int i;
-	int* tab = (int*) malloc(sizeof(int)*4);
-	for(i =0 ; i<4 ; i++){
-		tab[i] = cle[pos[i]];
-	}
-	return tab;
-}
+/*int* p4(int* cle){*/
+/*	int pos[4] = {1,3,2,0};*/
+/*	int i;*/
+/*	int* tab = (int*) malloc(sizeof(int)*4);*/
+/*	for(i =0 ; i<4 ; i++){*/
+/*		tab[i] = cle[pos[i]];*/
+/*	}*/
+/*	return tab;*/
+/*}*/
 
 
 
-int* decalage(int* cle){
-	int pos[10] = {1,2,3,4,0,6,7,8,9,5};
-	int i;
-	int* tab = (int*) malloc(sizeof(int)*10);
-	for(i =0 ; i<10 ; i++){
-		tab[i] = cle[pos[i]];
-	}
-	return tab;
-}
+/*int* decalage(int* cle){*/
+/*	int pos[10] = {1,2,3,4,0,6,7,8,9,5};*/
+/*	int i;*/
+/*	int* tab = (int*) malloc(sizeof(int)*10);*/
+/*	for(i =0 ; i<10 ; i++){*/
+/*		tab[i] = cle[pos[i]];*/
+/*	}*/
+/*	return tab;*/
+/*}*/
 
 int* ou_ex(int* ep, int* k, int bit){
 	int i;
@@ -168,16 +190,12 @@ int* ou_ex(int* ep, int* k, int bit){
 }
 
 
-int* F(int* cle,int* k){
-	int pos[8] = {7,4,5,6,5,6,7,4};
-	int i;
-	int* ep = (int*) malloc(sizeof(int)*8);
+int* F(int* cle, int* k, int* P4, int* EP){
+	int* ep = permute(cle,8,EP);
 	int* res = (int*) malloc(sizeof(int)*8);
 	int s0[4][4] = {1,0,3,2,3,2,1,0,0,2,1,3,3,1,3,2};
 	int s1[4][4] = {0,1,2,3,2,0,1,3,3,0,1,0,2,1,0,3};
-	for(i =0 ; i<8 ; i++){
-		ep[i] = cle[pos[i]];
-	}
+	
 	res = ou_ex(ep,k,8);
 	
 	int t1[2] = {res[0],res[3]};
@@ -195,14 +213,13 @@ int* F(int* cle,int* k){
 	
 	int* tab = unir(sortie, sortie2, 4);
 	
-	int* p_4 = p4(tab);
-	//afficher_cle(p_4,4);
-	return p_4;
+	int* p4 = permute(tab,4,P4);
+
+	return p4;
 }
 
-int* Fk(int* cle, int* k){
-    int* p4 = F(cle, k);
-    //afficher_cle(p4,4);
+int* Fk(int* cle, int* k, int* P4, int* EP){
+    int* p4 = F(cle, k, P4, EP);
     int i;
     int* tab = (int*) malloc(sizeof(int)*4);
 	for(i =0 ; i<4 ; i++){
@@ -217,23 +234,23 @@ int* Fk(int* cle, int* k){
     return cle;
 }
 
-int* SW(int* cle, int taille){
-	int pos[8] = {4,5,6,7,0,1,2,3};
-    int i;
-    int* rst = (int*) malloc(sizeof(int)*taille);
-    for(i=0; i<taille; i++){
-        rst[i] = cle[pos[i]];
-    }
-    
-    return rst;
+/*int* SW(int* cle, int taille){*/
+/*	int pos[8] = {4,5,6,7,0,1,2,3};*/
+/*    int i;*/
+/*    int* rst = (int*) malloc(sizeof(int)*taille);*/
+/*    for(i=0; i<taille; i++){*/
+/*        rst[i] = cle[pos[i]];*/
+/*    }*/
+/*    */
+/*    return rst;*/
+/*}*/
+
+int* get_k1(int* key, int* P8, int* P10, int* C_SHIFT){
+    return permute(permute(permute(key,10,P10),10,C_SHIFT),8,P8);
 }
 
-int* get_k1(int* key){
-    return p8(decalage(p10(key)));
-}
-
-int* get_k2(int* key){
-    return p8(decalage(decalage(decalage(p10(key)))));
+int* get_k2(int* key, int* P8, int* P10, int* C_SHIFT){
+    return permute(permute(permute(permute(permute(key,10,P10),10,C_SHIFT),10,C_SHIFT),10,C_SHIFT),8,P8);
 }
 
 int* unir(int* t1, int* t2, int taille){
@@ -247,19 +264,19 @@ int* unir(int* t1, int* t2, int taille){
     return rst;
 }
 
-int* encryption(int* plaintext, int* k1, int* k2){
+int* encryption(int* plaintext, int* k1, int* k2, int* IP, int* RIP, int* LR_SHIFT, int* P4, int* EP){
     //int* text = char_to_bin(plaintext, 8);
-    int* a = Fk(ip(plaintext),k1); 
-    int* b = SW(a,8);
-    int* c = Fk(b,k2);
-    int* d = rip(c);
-    //int* rst = rip(Fk(SW(Fk(ip(plaintext),k1),8),k2));
-    return d;    
+    int* a = Fk(permute(plaintext,8,IP),k1, P4, EP);
+    a = permute(a,8,LR_SHIFT);
+    a = Fk(a,k2,P4,EP);
+    a = permute(a,8,RIP);
+
+    return a;    
 }
 
-int* decryption(int* ciphertext, int* k1, int* k2){
+int* decryption(int* ciphertext, int* k1, int* k2, int* IP, int* RIP, int* LR_SHIFT, int* P4, int* EP){
     //int* text = char_to_bin(ciphertext, 8);
-    int* rst = ip(Fk(SW(Fk(rip(ciphertext),k2),8),k1));
+    int* rst = permute(Fk(permute(Fk(permute(ciphertext,8,IP),k2, P4, EP),8,LR_SHIFT),k1, P4, EP),8,RIP);
     return rst;
 }
 
