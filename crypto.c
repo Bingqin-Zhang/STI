@@ -5,22 +5,11 @@
 #include <time.h>
 #include<math.h>
 
-
-/** Fonction qui prend une chaine de caracteres et renvoie son evriture en binaire
-
-    @param c la chaine de caracteres à convertir
-    @return la conversion en binaire
-*/
 int* char_to_bin(char c, int taille){
     int* rst = int_to_bin(c, taille);
     return rst;
 }
 
-/** Fonction qui prend un entier et renvoie son equivalent en binaire
-
-    @param a l'entier à covertir
-    @return la conversion en binaire
-*/
 int* int_to_bin(int a, int taille){
     int* tmp = (int*) malloc(sizeof(int)*taille);
     int* rst = (int*) malloc(sizeof(int)*taille);
@@ -54,24 +43,6 @@ int bin_to_int(int* t){
     return rst;
 }
 
-char bin_to_char(int* tab){
-    int i, j = 7, rst;
-    for(i=0; i<8; i++){
-        if(tab[i] == 1)
-            rst += pow(2,j);
-        j--;
-    }
-    
-    return (char) rst;
-}
-
-/** Fonction qui execute une permution sur des bits selon une etape
-
-    @param bits les bits a modifier
-    @param taille le nombe de bis
-    @param etape represente le type de permutation
-    @return rst le resultat de a permutation sur les bits
-*/
 int* permute(int* bits, int taille, int etape[taille]){
     int* rst = (int*) malloc(sizeof(int)*taille);
     int i;
@@ -82,29 +53,29 @@ int* permute(int* bits, int taille, int etape[taille]){
     return rst;
 }
 
-int* cle(int taille){
+int* cle(int n){
 	int i, num;
-	int* tab = (int*) malloc(sizeof(int)*taille);
-	for(i = 0; i<taille; i++){
+	int* tab = (int*) malloc(sizeof(int)*n);
+	for(i = 0; i<n; i++){
 		num = rand() % 2;
 		tab[i] = num;
 	}
 	return tab;
 }
 
-void afficher_cle(int* cle, int bit){
+void afficher_cle(int* cle, int n){
 	int i;
-	for(i = 0; i<bit; i++){
+	for(i = 0; i<n; i++){
 		printf("%d",cle[i]);
 	}
 	printf("\n");
 }
 
-int* ou_ex(int* ep, int* k, int bit){
+int* ou_ex(int* t1, int* t2, int n){
 	int i;
-	int* tab = (int*) malloc(sizeof(int)*8);
-	for(i =0 ; i<bit ; i++){
-		if(ep[i] == k[i])
+	int* tab = (int*) malloc(sizeof(int)*n);
+	for(i =0 ; i<n ; i++){
+		if(t1[i] == t2[i])
 			tab[i] = 0;
 		else
 			tab[i] = 1;
@@ -165,20 +136,19 @@ int* get_k2(int* key, int* P8, int* P10, int* C_SHIFT){
     return permute(permute(permute(permute(permute(key,10,P10),10,C_SHIFT),10,C_SHIFT),10,C_SHIFT),8,P8);
 }
 
-int* unir(int* t1, int* t2, int taille){
+int* unir(int* t1, int* t2, int n){
     int i;
-    int* rst = (int*) malloc(sizeof(int)*taille);
-    for(i=0; i< taille/2; i++){
+    int* rst = (int*) malloc(sizeof(int)*n);
+    for(i=0; i< n/2; i++){
         rst[i] = t1[i];
-        rst[i+(taille/2)] = t2[i];
+        rst[i+(n/2)] = t2[i];
     }
     
     return rst;
 }
 
-int* encryption(char plaintext, int* k1, int* k2, int* IP, int* RIP, int* LR_SHIFT, int* P4, int* EP){
-    int* text = char_to_bin(plaintext, 8);
-    int* a = Fk(permute(text,8,IP),k1, P4, EP);
+int* encryption(int* plaintext, int* k1, int* k2, int* IP, int* RIP, int* LR_SHIFT, int* P4, int* EP){
+    int* a = Fk(permute(plaintext,8,IP),k1, P4, EP);
     a = permute(a,8,LR_SHIFT);
     a = Fk(a,k2,P4,EP);
     a = permute(a,8,RIP);
@@ -187,7 +157,6 @@ int* encryption(char plaintext, int* k1, int* k2, int* IP, int* RIP, int* LR_SHI
 }
 
 int* decryption(int* ciphertext, int* k1, int* k2, int* IP, int* RIP, int* LR_SHIFT, int* P4, int* EP){
-    //int* text = char_to_bin(ciphertext, 8);
     int* rst = permute(Fk(permute(Fk(permute(ciphertext,8,IP),k2, P4, EP),8,LR_SHIFT),k1, P4, EP),8,RIP);
     return rst;
 }
